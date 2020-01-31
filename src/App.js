@@ -48,8 +48,6 @@ function App() {
           <a href="tel:917 658 6404">917 658 6404</a> •{' '}
           <a href="mailto:info@mohr-beauty.com">info@mohr-beauty.com</a>
         </p>
-        {/* <p className="address_street">303 fith avenue • suite 906 • new york</p>
-        <p>917 658 6404 • info@mohr-beauty.com</p> */}
       </div>
     </div>
   )
