@@ -1,38 +1,158 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  text-align: left;
+  color: white;
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  height: 100vh;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+a:hover {
+  color: #ecfc82;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.address {
+  padding: 0 55px 55px 55px;
+  font-size: 1.4vw;
+  letter-spacing: 5px;
+  line-height: 2.5vw;
+}
+
+.address_street {
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.logo {
+  padding: 55px 55px 0 55px;
+}
+
+.logo_slogan {
+  font-size: 2vw;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+}
+
+.logo_text {
+  font-size: 7vw;
+  text-transform: uppercase;
+  letter-spacing: 7px;
+  line-height: 7vw;
+}
+
+.promotion {
+  font-size: 3vw;
+  color: #55bf79;
+  font-style: italic;
+  margin-top: -55px;
+  letter-spacing: 5px;
+  padding: 0 55px 0 55px;
+}
+
+.no_br {
+  white-space: nowrap;
+}
+
+.fade-in {
+  animation: fadeIn ease 3s;
+  -webkit-animation: fadeIn ease 3s;
+  -moz-animation: fadeIn ease 3s;
+  -o-animation: fadeIn ease 3s;
+  -ms-animation: fadeIn ease 3s;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
   }
-  to {
-    transform: rotate(360deg);
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media only screen and (max-width: 414px) {
+  .App {
+    height: 90vh;
+  }
+  .logo {
+    padding: 55px 0 0 25px;
+  }
+
+  .logo_slogan {
+    font-size: 4vw;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+  }
+
+  .logo_text {
+    font-size: 10vw;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    line-height: 9vw;
+  }
+
+  .address {
+    padding: 0 25px 55px 25px;
+    font-size: 3vw;
+    letter-spacing: 2px;
+    line-height: 5vw;
+  }
+
+  .address_street {
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .promotion {
+    font-size: 5vw;
+    color: #55bf79;
+    font-style: italic;
+    margin-top: -55px;
+    letter-spacing: 5px;
+    padding: 0 25px 0 25px;
   }
 }

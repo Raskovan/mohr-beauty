@@ -1,26 +1,58 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react'
+import './App.css'
 
 function App() {
+  const [promoText, setpromoText] = useState()
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(
+          `https://cdn.contentful.com/spaces/${process.env.REACT_APP_CONTENTFUL_SPACE_ID}/entries?access_token=${process.env.REACT_APP_CONTENTFUL_API_KEY}`
+        )
+        const json = await response.json()
+        setpromoText(
+          json.items.map(item => {
+            return item.fields
+          })
+        )
+      } catch (err) {
+        console.error('Error fetching texts:', err)
+      }
+    }
+    fetchData()
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div className="logo">
+        <p className="logo_slogan">Customized skincare</p>
+        <p className="logo_text">Mohr Beauty.</p>
+      </div>
+      <div className="promotion">
+        {promoText && (
+          <p className="fade-in">
+            {promoText[0].month}.{' '}
+            <span className="no_br">{promoText[0].description}</span>
+          </p>
+        )}
+      </div>
+      <div className="address">
         <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+          className="address_street"
+          href="https://goo.gl/maps/hCxGuAWUtywzmiHq5"
+          target="_new"
         >
-          Learn React
+          303 fith avenue • suite 906 • new york
         </a>
-      </header>
+        <p>
+          <a href="tel:917 658 6404">917 658 6404</a> •{' '}
+          <a href="mailto:info@mohr-beauty.com">info@mohr-beauty.com</a>
+        </p>
+        {/* <p className="address_street">303 fith avenue • suite 906 • new york</p>
+        <p>917 658 6404 • info@mohr-beauty.com</p> */}
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
