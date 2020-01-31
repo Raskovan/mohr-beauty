@@ -22,6 +22,37 @@ function App() {
     fetchData()
   }, [])
 
+  const getColor = month => {
+    switch (month.toUpperCase()) {
+      case 'JANUARY':
+        return '#55bf79'
+      case 'FEBRUARY':
+        return '#df6abe'
+      case 'MARCH':
+        return '#8f54e1'
+      case 'APRIL':
+        return '#54e1c0'
+      case 'MAY':
+        return '#c2e154'
+      case 'JUNE':
+        return '#e18554'
+      case 'JULY':
+        return '#e15454'
+      case 'AUGUST':
+        return '5488e1'
+      case 'SEPTEMBER':
+        return '#54e1df'
+      case 'OCTOBER':
+        return '#d5e154'
+      case 'NOVEMBER':
+        return '#da54e1'
+      case 'DECEMBER':
+        return '#549fe1'
+      default:
+        return '#55bf79'
+    }
+  }
+
   return (
     <div className="App">
       <div className="logo">
@@ -30,8 +61,11 @@ function App() {
       </div>
       <div className="promotion">
         {promoText && (
-          <p className="fade-in">
-            {promoText[0].month}.{' '}
+          <p
+            className="fade-in"
+            style={{ color: getColor(promoText[0].month) }}
+          >
+            <span className="caps_lock">{promoText[0].month}.</span>{' '}
             <span className="no_br">{promoText[0].description}</span>
           </p>
         )}

@@ -51,7 +51,6 @@ a:hover {
 
 .promotion {
   font-size: 3vw;
-  color: #55bf79;
   font-style: italic;
   margin-top: -55px;
   letter-spacing: 5px;
@@ -60,6 +59,10 @@ a:hover {
 
 .no_br {
   white-space: nowrap;
+}
+
+.caps_lock {
+  text-transform: uppercase;
 }
 
 .fade-in {
