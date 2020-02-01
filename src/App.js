@@ -3,6 +3,11 @@ import './App.css'
 
 function App() {
   const [promoText, setpromoText] = useState()
+  const [color, setColor] = useState({
+    addr: 'white',
+    tel: 'white',
+    mail: 'white'
+  })
   useEffect(() => {
     async function fetchData() {
       try {
@@ -53,6 +58,12 @@ function App() {
     }
   }
 
+  function changeStyle(month) {
+    if (color[month] === 'white')
+      setColor({ ...color, [month]: getColor(promoText[0].month) })
+    else setColor({ ...color, [month]: 'white' })
+  }
+
   return (
     <div className="App">
       <div className="logo">
@@ -72,6 +83,9 @@ function App() {
       </div>
       <div className="address">
         <a
+          style={{ color: color['addr'] }}
+          onMouseOver={() => changeStyle('addr')}
+          onMouseOut={() => changeStyle('addr')}
           className="address_street"
           href="https://goo.gl/maps/hCxGuAWUtywzmiHq5"
           target="_new"
@@ -79,8 +93,23 @@ function App() {
           303 fith avenue • suite 906 • new york
         </a>
         <p>
-          <a href="tel:917 658 6404">917 658 6404</a> •{' '}
-          <a href="mailto:info@mohr-beauty.com">info@mohr-beauty.com</a>
+          <a
+            style={{ color: color['tel'] }}
+            onMouseOver={() => changeStyle('tel')}
+            onMouseOut={() => changeStyle('tel')}
+            href="tel:917 658 6404"
+          >
+            917 658 6404
+          </a>{' '}
+          •{' '}
+          <a
+            style={{ color: color['mail'] }}
+            onMouseOver={() => changeStyle('mail')}
+            onMouseOut={() => changeStyle('mail')}
+            href="mailto:info@mohr-beauty.com"
+          >
+            info@mohr-beauty.com
+          </a>
         </p>
       </div>
     </div>
