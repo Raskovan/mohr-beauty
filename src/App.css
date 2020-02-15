@@ -188,6 +188,7 @@ a {
     margin-top: -55px;
     letter-spacing: 5px;
     padding: 0 25px 0 25px;
+    line-height: 6.5vw;
   }
   .desktop_only {
     display: none;
