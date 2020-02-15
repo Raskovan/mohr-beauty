@@ -77,7 +77,7 @@ function App() {
             style={{ color: getColor(promoText[0].month) }}
           >
             <span className="caps_lock">{promoText[0].month}.</span>{' '}
-            <span className="no_br">{promoText[0].description}</span>
+            <span>{promoText[0].description}</span>
           </p>
         )}
       </div>
