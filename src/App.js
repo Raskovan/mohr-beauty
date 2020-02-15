@@ -3,6 +3,7 @@ import './App.css'
 
 function App() {
   const [promoText, setpromoText] = useState()
+  const [showPrices, setShowPrices] = useState(false)
   const [color, setColor] = useState({
     addr: 'white',
     tel: 'white',
@@ -64,24 +65,56 @@ function App() {
     else setColor({ ...color, [month]: 'white' })
   }
 
+  const menuClick = () => {
+    setShowPrices(!showPrices)
+  }
+
   return (
     <div className="App">
-      <div className="logo">
-        <p className="logo_slogan">Customized skincare</p>
-        <p className="logo_text">Mohr Beauty.</p>
+      <div className="header">
+        <div className="logo">
+          <p className="logo_slogan">Customized skincare</p>
+          <p className="logo_text">Mohr Beauty.</p>
+        </div>
+        <div className="desktop_only">
+          <button
+            className={!showPrices ? 'prices' : 'promo'}
+            onClick={() => menuClick()}
+          >
+            {!showPrices ? 'PRICES' : 'PROMO'}
+          </button>
+        </div>
       </div>
       <div className="promotion">
-        {promoText && (
-          <p
-            className="fade-in"
-            style={{ color: getColor(promoText[0].month) }}
-          >
-            <span className="caps_lock">{promoText[0].month}.</span>{' '}
-            <span>{promoText[0].description}</span>
-          </p>
+        {!showPrices ? (
+          promoText ? (
+            <p
+              className="fade-in"
+              style={{ color: getColor(promoText[0].month) }}
+            >
+              <span className="caps_lock">{promoText[0].month}.</span>{' '}
+              <span>{promoText[0].description}</span>
+            </p>
+          ) : null
+        ) : (
+          <div className="fade-in">
+            <p className="line-spacing">Gua Sha facial&nbsp;$120.</p>
+            <p className="line-spacing">Chemical peel facial&nbsp;$140.</p>
+            <p className="line-spacing">Microneedling facial&nbsp;$350.</p>
+          </div>
         )}
       </div>
+
       <div className="address">
+        <div className="mobile_only">
+          <button
+            style={{ color: 'auto' }}
+            className={!showPrices ? 'prices' : 'promo'}
+            onClick={() => menuClick()}
+          >
+            {!showPrices ? 'PRICES' : 'PROMO'}
+          </button>
+        </div>
         <a
           style={{ color: color['addr'] }}
           onMouseOver={() => changeStyle('addr')}

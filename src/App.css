@@ -32,9 +32,9 @@ a {
   margin-bottom: 10px;
 }
 
-.logo {
+/* .logo {
   padding: 55px 55px 0 55px;
-}
+} */
 
 .logo_slogan {
   font-size: 2vw;
@@ -55,10 +55,39 @@ a {
   margin-top: -55px;
   letter-spacing: 5px;
   padding: 0 55px 0 55px;
+  line-height: 5vw;
 }
 
 .no_br {
   white-space: nowrap;
+}
+
+.header {
+  padding: 55px 55px 0 55px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.prices {
+  padding: 10px;
+  background: white;
+  color: black;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2vw;
+}
+
+.promo {
+  padding: 10px;
+  background: black;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2vw;
+}
+
+.mobile_only {
+  display: none;
 }
 
 .caps_lock {
@@ -121,7 +150,10 @@ a {
   .App {
     height: 90vh;
   }
-  .logo {
+  /* .logo {
+    padding: 55px 0 0 25px;
+  } */
+  .header {
     padding: 55px 0 0 25px;
   }
 
@@ -156,5 +188,25 @@ a {
     margin-top: -55px;
     letter-spacing: 5px;
     padding: 0 25px 0 25px;
+  }
+  .desktop_only {
+    display: none;
+  }
+
+  .mobile_only {
+    display: inherit;
+    padding-bottom: 15px;
+  }
+
+  .prices {
+    font-size: 3.2vw;
+  }
+
+  .promo {
+    font-size: 3.2vw;
+  }
+
+  .line-spacing {
+    margin-bottom: 10px;
   }
 }
