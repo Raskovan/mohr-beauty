@@ -3,10 +3,14 @@ import './App.css'
 
 function App() {
   const [promoText, setpromoText] = useState()
+  const [showPrices, setShowPrices] = useState(false)
+  let linkTextDefault = showPrices ? '#080808' : 'white'
+  const invertedColor = !showPrices ? '#080808' : 'white'
   const [color, setColor] = useState({
-    addr: 'white',
-    tel: 'white',
-    mail: 'white'
+    addr: linkTextDefault,
+    tel: linkTextDefault,
+    mail: linkTextDefault,
+    btn: invertedColor
   })
   useEffect(() => {
     async function fetchData() {
@@ -58,30 +62,71 @@ function App() {
     }
   }
 
-  function changeStyle(month) {
-    if (color[month] === 'white')
-      setColor({ ...color, [month]: getColor(promoText[0].month) })
-    else setColor({ ...color, [month]: 'white' })
+  const highlightColor = promoText ? getColor(promoText[0].month) : null
+
+  function changeStyle(attr) {
+    if (color[attr] === linkTextDefault)
+      setColor({ ...color, [attr]: getColor(promoText[0].month) })
+    else if (attr === 'btn') setColor({ ...color, [attr]: 'auto' })
+    else setColor({ ...color, [attr]: linkTextDefault })
+  }
+
+  const menuClick = () => {
+    setShowPrices(!showPrices)
+    linkTextDefault = !showPrices ? '#080808' : 'white'
+    const initState = {
+      addr: linkTextDefault,
+      tel: linkTextDefault,
+      mail: linkTextDefault
+    }
+    setColor(initState)
   }
 
   return (
-    <div className="App">
-      <div className="logo">
-        <p className="logo_slogan">Customized skincare</p>
-        <p className="logo_text">Mohr Beauty.</p>
+    <div className={!showPrices ? 'App' : 'App featured'}>
+      <div className="header">
+        <div className="logo">
+          <p className="logo_slogan">Customized skincare</p>
+          <p className="logo_text">Mohr Beauty.</p>
+        </div>
+        <div className="desktop_only">
+          <button
+            style={{ color: color['btn'] }}
+            onMouseOver={() => setColor({ ...color, btn: highlightColor })}
+            onMouseOut={() => setColor({ ...color, btn: invertedColor })}
+            className={!showPrices ? 'prices' : 'promo'}
+            onClick={() => menuClick()}
+          >
+            {!showPrices ? 'PRICES' : 'PROMO'}
+          </button>
+        </div>
       </div>
       <div className="promotion">
-        {promoText && (
-          <p
-            className="fade-in"
-            style={{ color: getColor(promoText[0].month) }}
-          >
-            <span className="caps_lock">{promoText[0].month}.</span>{' '}
-            <span className="no_br">{promoText[0].description}</span>
-          </p>
+        {!showPrices ? (
+          promoText ? (
+            <p className="fade-in" style={{ color: highlightColor }}>
+              <span className="caps_lock">{promoText[0].month}.</span>{' '}
+              <span className="no_br">{promoText[0].description}</span>
+            </p>
+          ) : null
+        ) : (
+          <div className="fade-in">
+            <p className="line-spacing">Gua Sha facial&nbsp;$120.</p>
+            <p className="line-spacing">Chemical peel facial&nbsp;$140.</p>
+            <p className="line-spacing">Microneedling facial&nbsp;$350.</p>
+          </div>
         )}
       </div>
       <div className="address">
+        <div className="mobile_only">
+          <button
+            style={{ color: 'auto' }}
+            className={!showPrices ? 'prices' : 'promo'}
+            onClick={() => menuClick()}
+          >
+            {!showPrices ? 'PRICES' : 'PROMO'}
+          </button>
+        </div>
         <a
           style={{ color: color['addr'] }}
           onMouseOver={() => changeStyle('addr')}

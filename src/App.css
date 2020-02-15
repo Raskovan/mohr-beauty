@@ -1,24 +1,32 @@
 .App {
   text-align: left;
-  color: white;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   height: 100vh;
+  background: var(--black);
+  color: var(--white);
+  transition: 0.5s ease;
+  -moz-transition: 0.5s ease;
+  -webkit-transition: 0.5s ease;
+}
+
+.featured {
+  background: var(--white);
+  color: var(--black);
 }
 
 p {
   margin: 0;
 }
 
-a {
-  text-decoration: none;
-  color: white;
-}
-
 /* a:hover {
   color: #df6abe;
 } */
+
+.mobile_only {
+  display: none;
+}
 
 .address {
   padding: 0 55px 55px 55px;
@@ -32,8 +40,32 @@ a {
   margin-bottom: 10px;
 }
 
-.logo {
+.header {
   padding: 55px 55px 0 55px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.prices {
+  padding: 10px;
+  background: white;
+  color: black;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2vw;
+}
+
+.promo {
+  padding: 10px;
+  background: black;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2vw;
+}
+
+.logo {
+  /* padding: 55px 55px 0 55px; */
 }
 
 .logo_slogan {
@@ -55,11 +87,12 @@ a {
   margin-top: -55px;
   letter-spacing: 5px;
   padding: 0 55px 0 55px;
+  line-height: 4.5vw;
 }
 
-.no_br {
+/* .no_br {
   white-space: nowrap;
-}
+} */
 
 .caps_lock {
   text-transform: uppercase;
@@ -121,8 +154,13 @@ a {
   .App {
     height: 90vh;
   }
-  .logo {
+  /* .logo {
     padding: 55px 0 0 25px;
+  } */
+
+  .header {
+    padding: 55px 0 0 25px;
+    flex-direction: column;
   }
 
   .logo_slogan {
@@ -152,9 +190,29 @@ a {
 
   .promotion {
     font-size: 5vw;
+    line-height: 7.5vw;
     font-style: italic;
     margin-top: -55px;
     letter-spacing: 5px;
     padding: 0 25px 0 25px;
+  }
+
+  .prices {
+    font-size: 3.2vw;
+  }
+
+  .promo {
+    font-size: 3.2vw;
+  }
+
+  .desktop_only {
+    display: none;
+  }
+  .mobile_only {
+    margin-bottom: 15px;
+    display: inherit;
+  }
+  .line-spacing {
+    margin-bottom: 10px;
   }
 }

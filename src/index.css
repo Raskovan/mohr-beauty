@@ -1,7 +1,19 @@
+:root {
+  --black: #080808;
+  --white: white;
+}
+
+button,
 body {
-  background: #080808;
   margin: 0;
   font-family: 'Playfair Display', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: none;
+  color: var(--white);
+}
+
+.featured > a {
+  color: var(--black);
 }
