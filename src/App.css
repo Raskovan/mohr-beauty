@@ -27,6 +27,13 @@ a {
   line-height: 2.5vw;
 }
 
+.intro_pricing {
+  font-size: 1.4vw;
+  letter-spacing: 3px;
+  line-height: 2.5vw;
+  font-style: initial;
+}
+
 .address_street {
   text-transform: uppercase;
   margin-bottom: 10px;
@@ -188,7 +195,7 @@ a {
     margin-top: -55px;
     letter-spacing: 5px;
     padding: 0 25px 0 25px;
-    line-height: 6.5vw;
+    line-height: 7vw;
   }
   .desktop_only {
     display: none;
@@ -209,5 +216,10 @@ a {
 
   .line-spacing {
     margin-bottom: 10px;
+  }
+  .intro_pricing {
+    font-size: 3vw;
+    line-height: 6vw;
+    margin-bottom: 3vw;
   }
 }

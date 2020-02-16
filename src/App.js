@@ -81,7 +81,7 @@ function App() {
             className={!showPrices ? 'prices' : 'promo'}
             onClick={() => menuClick()}
           >
-            {!showPrices ? 'PRICES' : 'PROMO'}
+            {!showPrices ? 'PRICING' : 'PROMO'}
           </button>
         </div>
       </div>
@@ -98,6 +98,11 @@ function App() {
           ) : null
         ) : (
           <div className="fade-in">
+            <p className="intro_pricing">
+              All facials at Mohr Beauty are customized, tailored to individual
+              needs of your skin at the moment. All services include face, neck,
+              and décolletage and are 75 min long.
+            </p>
             <p className="line-spacing">Gua Sha facial&nbsp;$120.</p>
             <p className="line-spacing">Chemical peel facial&nbsp;$140.</p>
             <p className="line-spacing">Microneedling facial&nbsp;$350.</p>
@@ -112,7 +117,7 @@ function App() {
             className={!showPrices ? 'prices' : 'promo'}
             onClick={() => menuClick()}
           >
-            {!showPrices ? 'PRICES' : 'PROMO'}
+            {!showPrices ? 'PRICING' : 'PROMO'}
           </button>
         </div>
         <a
