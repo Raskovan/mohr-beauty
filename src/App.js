@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react'
+import * as helper from './helper'
 import './App.css'
 
 function App() {
-  const [promoText, setpromoText] = useState()
+  const [promoText, setPromoText] = useState()
+  const [priceText, setPriceText] = useState()
+  const [contactText, setContactText] = useState()
   const [showPrices, setShowPrices] = useState(false)
   const [color, setColor] = useState({
     addr: 'white',
     tel: 'white',
     mail: 'white'
   })
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -16,11 +20,11 @@ function App() {
           `https://cdn.contentful.com/spaces/${process.env.REACT_APP_CONTENTFUL_SPACE_ID}/entries?access_token=${process.env.REACT_APP_CONTENTFUL_API_KEY}`
         )
         const json = await response.json()
-        setpromoText(
-          json.items.map(item => {
-            return item.fields
-          })
-        )
+        json.items.forEach(item => {
+          if (item.fields.id === 'promo') setPromoText(item.fields)
+          if (item.fields.id === 'pricing') setPriceText(item.fields)
+          if (item.fields.id === 'contacts') setContactText(item.fields)
+        })
       } catch (err) {
         console.error('Error fetching texts:', err)
       }
@@ -28,40 +32,9 @@ function App() {
     fetchData()
   }, [])
 
-  const getColor = month => {
-    switch (month.toUpperCase()) {
-      case 'JANUARY':
-        return '#55bf79'
-      case 'FEBRUARY':
-        return '#df6abe'
-      case 'MARCH':
-        return '#8f54e1'
-      case 'APRIL':
-        return '#54e1c0'
-      case 'MAY':
-        return '#c2e154'
-      case 'JUNE':
-        return '#e18554'
-      case 'JULY':
-        return '#e15454'
-      case 'AUGUST':
-        return '5488e1'
-      case 'SEPTEMBER':
-        return '#54e1df'
-      case 'OCTOBER':
-        return '#d5e154'
-      case 'NOVEMBER':
-        return '#da54e1'
-      case 'DECEMBER':
-        return '#549fe1'
-      default:
-        return '#55bf79'
-    }
-  }
-
   function changeStyle(month) {
     if (color[month] === 'white')
-      setColor({ ...color, [month]: getColor(promoText[0].month) })
+      setColor({ ...color, [month]: helper.getColor(promoText.month) })
     else setColor({ ...color, [month]: 'white' })
   }
 
@@ -90,26 +63,23 @@ function App() {
           promoText ? (
             <p
               className="fade-in"
-              style={{ color: getColor(promoText[0].month) }}
+              style={{ color: helper.getColor(promoText.month) }}
             >
-              <span className="caps_lock">{promoText[0].month}.</span>{' '}
-              <span>{promoText[0].description}</span>
+              <span className="caps_lock">{promoText.month}.</span>{' '}
+              <span>{promoText.description}</span>
             </p>
           ) : null
-        ) : (
+        ) : priceText ? (
           <div className="fade-in">
-            <p className="intro_pricing">
-              All facials at Mohr Beauty are customized, tailored to individual
-              needs of your skin at the moment. All services include face, neck,
-              and décolletage and are 75 min long.
-            </p>
-            <p className="line-spacing">Gua Sha facial&nbsp;$120.</p>
-            <p className="line-spacing">Chemical peel facial&nbsp;$140.</p>
-            <p className="line-spacing">Microneedling facial&nbsp;$350.</p>
+            <p className="intro_pricing">{priceText.intro}</p>
+            {priceText.details.map((detail, i) => (
+              <p className="line-spacing" key={i}>
+                {detail}
+              </p>
+            ))}
           </div>
-        )}
+        ) : null}
       </div>
-
       <div className="address">
         <div className="mobile_only">
           <button
@@ -120,35 +90,40 @@ function App() {
             {!showPrices ? 'PRICING' : 'PROMO'}
           </button>
         </div>
-        <a
-          style={{ color: color['addr'] }}
-          onMouseOver={() => changeStyle('addr')}
-          onMouseOut={() => changeStyle('addr')}
-          className="address_street"
-          href="https://goo.gl/maps/hCxGuAWUtywzmiHq5"
-          target="_new"
-        >
-          303 fith avenue • suite 906 • new york
-        </a>
-        <p>
-          <a
-            style={{ color: color['tel'] }}
-            onMouseOver={() => changeStyle('tel')}
-            onMouseOut={() => changeStyle('tel')}
-            href="tel:917 658 6404"
-          >
-            917 658 6404
-          </a>{' '}
-          •{' '}
-          <a
-            style={{ color: color['mail'] }}
-            onMouseOver={() => changeStyle('mail')}
-            onMouseOut={() => changeStyle('mail')}
-            href="mailto:info@mohr-beauty.com"
-          >
-            info@mohr-beauty.com
-          </a>
-        </p>
+
+        {contactText ? (
+          <>
+            <a
+              style={{ color: color['addr'] }}
+              onMouseOver={() => changeStyle('addr')}
+              onMouseOut={() => changeStyle('addr')}
+              className="address_street"
+              href={helper.createMapLink(contactText.address)}
+              target="_new"
+            >
+              {contactText.address}
+            </a>
+            <p>
+              <a
+                style={{ color: color['tel'] }}
+                onMouseOver={() => changeStyle('tel')}
+                onMouseOut={() => changeStyle('tel')}
+                href={`tel:${contactText.phone}`}
+              >
+                {contactText.phone}
+              </a>{' '}
+              •{' '}
+              <a
+                style={{ color: color['mail'] }}
+                onMouseOver={() => changeStyle('mail')}
+                onMouseOut={() => changeStyle('mail')}
+                href={`mailto:${contactText.email}`}
+              >
+                {contactText.email}
+              </a>
+            </p>
+          </>
+        ) : null}
       </div>
     </div>
   )
