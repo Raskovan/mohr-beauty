@@ -4,6 +4,7 @@ import * as helper from '../helper'
 
 export default function Info(props) {
   const { promoText, priceText, showPrices } = props
+
   return (
     <div className="promotion">
       {!showPrices ? (
@@ -24,6 +25,7 @@ export default function Info(props) {
               {detail}
             </p>
           ))}
+          <p className="intro_caption">{priceText.caption}</p>
         </div>
       ) : null}
     </div>
